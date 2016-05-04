@@ -12,7 +12,7 @@ var ctx = c.getContext("2d");
 
 ctx.fillStyle = "#000000";
 ctx.fillRect(0,0,1000,600);
-ctx.fillStyle = "#FFFFFF"
+ctx.fillStyle = "#FFFFFF";
 ctx.fillRect(20,225,20,150);
 ctx.fillRect(960,225,20,150);
 ctx.beginPath();
@@ -26,7 +26,6 @@ ctx.font= "80px Veranda";
 ctx.fillStyle= "white";
 ctx.fillText("0 0",450,70);
 
-var hello = 1;
 var keyWPressed = false;
 var keySPressed = false;
 var keyArrowUpPressed = false;
@@ -59,6 +58,32 @@ window.addEventListener('keydown', function (evt) {
 function gameloop(){
 	window.requestAnimationFrame(gameloop);
 }
+
+// function loop(key){
+// 	if (key = true){
+// 		console.log("true");
+// 	}else{
+// 		console.log("false");
+// 	}
+// 	loop(); 
+// }
+
+loop(keyWPressed);
+
+/*so ctx.fillRect can draw over the current canvas, but it'll take the color of the last fillStyle color. So inorder to move the paddle up, we'll have to first redraw the the paddle up 10px in white, and then draw the last bit of the paddle in black, let's simulate the paddle moving up
+
+if the paddle starts at the coordinates (20,225,20,150)
+
+moving up 10px would be 
+(20,220,20,145)
+
+but we'll have to erase the trail left behind, so we'll change the color to black, 
+
+ctx.fillStyle = "#000000";
+and then do 
+
+(20,370,20,15) 
+*/
 
 
 </script>
