@@ -1,0 +1,84 @@
+Q: Write an html page with an image (use URL 'http://i.imgur.com/XwoM5.jpg') and the title, 'My first web page'.
+
+A:
+<html>
+	<head>
+		<title>My first web page</title>
+	</head>
+	<body>
+		<h1>War & Peace</h1>
+		<a href="http://zombo.com"> <img src="http://i.imgur.com/XwoM5.jpg"/>
+		</a>
+		<ul>
+			<li>Blick</li>
+			<li>Glick</li>
+			<li>Flick</li>
+			<li>Plick</li>
+			<li>Quee</li>
+			<li>Snick</li>
+			<li>Whick</li>
+		</ul>
+		<table>
+			<tr>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>4</td>
+				<td>6</td>
+				<td>8</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>6</td>
+				<td>9</td>
+				<td>12</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>8</td>
+				<td>12</td>
+				<td>16</td>
+			</tr>
+		</table>
+	</body>
+</html>
+
+===========
+
+Q: With the previous exercise, make the image into a link to 'http://zombo.com'.
+
+A:
+
+==========
+
+Q: To the previous exercise, add a header reading 'War & Peace'
+
+A:
+
+==========
+
+Q: To the previous exercise, add an unordered list of the Seven Dwarfs.
+
+A:
+
+==========
+
+Q: To the previous exercise, add a multiplication table of the numbers 1 to 4 (use a table tag), e.g.:
+
+1   2   3   4
+2   4   6   8
+3   6   9   12
+4   8   12  16
+
+NOTE: The table won't look pretty, but don't worry about that for now.
+
+A:
+
+
+
+
+
