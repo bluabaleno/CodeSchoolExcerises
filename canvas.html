@@ -9,12 +9,14 @@
 <script>
 var c = document.getElementById("laCanvas");
 var ctx = c.getContext("2d");
+var lefHeight = 225;
+var rightHeight = 225;
 
 ctx.fillStyle = "#000000";
 ctx.fillRect(0,0,1000,600);
 ctx.fillStyle = "#FFFFFF";
-ctx.fillRect(20,225,20,150);
-ctx.fillRect(960,225,20,150);
+leftPaddle = ctx.fillRect(20,lefHeight,20,lefHeight-75);
+rightPaddle = ctx.fillRect(960,rightHeight,20,rightHeight-75);
 ctx.beginPath();
 ctx.linewidth="5";
 ctx.strokeStyle="black";
@@ -55,20 +57,39 @@ window.addEventListener('keydown', function (evt) {
 
 // making the left paddle move up when keyWPressed is true.
 
-function gameloop(){
-	window.requestAnimationFrame(gameloop);
-}
-
-// function loop(key){
-// 	if (key = true){
-// 		console.log("true");
-// 	}else{
-// 		console.log("false");
-// 	}
-// 	loop(); 
+// function gameloop(){
+// 	update();
+// 	draw();
+// 	window.requestAnimationFrame(gameloop);
 // }
 
-loop(keyWPressed);
+
+// function update(){
+// 	//updates the truth value
+// }
+
+function draw(){
+
+ctx.fillStyle = "#000000";
+ctx.fillRect(0,0,1000,600);
+ctx.fillStyle = "#FFFFFF";
+leftPaddle = ctx.fillRect(20,lefHeight,20,lefHeight-75);
+rightPaddle = ctx.fillRect(960,rightHeight,20,rightHeight-75);
+ctx.beginPath();
+ctx.linewidth="5";
+ctx.strokeStyle="black";
+ctx.beginPath();
+ctx.arc(500,300,15,0,2*Math.PI);
+ctx.fillStyle = "white";
+ctx.fill();
+ctx.font= "80px Veranda";
+ctx.fillStyle= "white";
+ctx.fillText("0 0",450,70);
+
+}
+
+
+
 
 /*so ctx.fillRect can draw over the current canvas, but it'll take the color of the last fillStyle color. So inorder to move the paddle up, we'll have to first redraw the the paddle up 10px in white, and then draw the last bit of the paddle in black, let's simulate the paddle moving up
 
