@@ -9,14 +9,14 @@
 <script>
 var c = document.getElementById("laCanvas");
 var ctx = c.getContext("2d");
-var lefHeight = 225;
+var leftHeight = 225;
 var rightHeight = 225;
 
 ctx.fillStyle = "#000000";
 ctx.fillRect(0,0,1000,600);
 ctx.fillStyle = "#FFFFFF";
-leftPaddle = ctx.fillRect(20,lefHeight,20,lefHeight-75);
-rightPaddle = ctx.fillRect(960,rightHeight,20,rightHeight-75);
+leftPaddle = ctx.fillRect(20,leftHeight,20,150);
+rightPaddle = ctx.fillRect(960,rightHeight,20,150);
 ctx.beginPath();
 ctx.linewidth="5";
 ctx.strokeStyle="black";
@@ -73,8 +73,8 @@ function draw(){
 ctx.fillStyle = "#000000";
 ctx.fillRect(0,0,1000,600);
 ctx.fillStyle = "#FFFFFF";
-leftPaddle = ctx.fillRect(20,lefHeight,20,lefHeight-75);
-rightPaddle = ctx.fillRect(960,rightHeight,20,rightHeight-75);
+leftPaddle = ctx.fillRect(20,leftHeight,20,150);
+rightPaddle = ctx.fillRect(960,rightHeight,20,150);
 ctx.beginPath();
 ctx.linewidth="5";
 ctx.strokeStyle="black";
