@@ -55,40 +55,38 @@ window.addEventListener('keydown', function (evt) {
 	}
 });
 
-// making the left paddle move up when keyWPressed is true.
-
-// function gameloop(){
-// 	update();
-// 	draw();
-// 	window.requestAnimationFrame(gameloop);
-// }
-
-
-// function update(){
-// 	//updates the truth value
-// }
-
 function draw(){
-
-ctx.fillStyle = "#000000";
-ctx.fillRect(0,0,1000,600);
-ctx.fillStyle = "#FFFFFF";
-leftPaddle = ctx.fillRect(20,leftHeight,20,150);
-rightPaddle = ctx.fillRect(960,rightHeight,20,150);
-ctx.beginPath();
-ctx.linewidth="5";
-ctx.strokeStyle="black";
-ctx.beginPath();
-ctx.arc(500,300,15,0,2*Math.PI);
-ctx.fillStyle = "white";
-ctx.fill();
-ctx.font= "80px Veranda";
-ctx.fillStyle= "white";
-ctx.fillText("0 0",450,70);
+	ctx.fillStyle = "#000000";
+	ctx.fillRect(0,0,1000,600);
+	ctx.fillStyle = "#FFFFFF";
+	leftPaddle = ctx.fillRect(20,leftHeight,20,150);
+	rightPaddle = ctx.fillRect(960,rightHeight,20,150);
+	ctx.beginPath();
+	ctx.linewidth="5";
+	ctx.strokeStyle="black";
+	ctx.beginPath();
+	ctx.arc(500,300,15,0,2*Math.PI);
+	ctx.fillStyle = "white";
+	ctx.fill();
+	ctx.font= "80px Veranda";
+	ctx.fillStyle= "white";
+	ctx.fillText("0 0",450,70);
 
 }
 
+function update(){
+	if (keyWPressed){
+		leftHeight = leftHeight - 5;
+	}
+}
 
+function gameloop(){
+	update();
+	draw();
+	window.requestAnimationFrame(gameloop);
+}
+
+window.addEventListener('keydown', gameloop());
 
 
 /*so ctx.fillRect can draw over the current canvas, but it'll take the color of the last fillStyle color. So inorder to move the paddle up, we'll have to first redraw the the paddle up 10px in white, and then draw the last bit of the paddle in black, let's simulate the paddle moving up
