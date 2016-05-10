@@ -11,6 +11,9 @@ var c = document.getElementById("laCanvas");
 var ctx = c.getContext("2d");
 var leftHeight = 225;
 var rightHeight = 225;
+var ballYcord = 500;
+var ballXcord = 300;
+var ballDirectionSlope = Math.random();
 
 ctx.fillStyle = "#000000";
 ctx.fillRect(0,0,1000,600);
@@ -21,7 +24,7 @@ ctx.beginPath();
 ctx.linewidth="5";
 ctx.strokeStyle="black";
 ctx.beginPath();
-ctx.arc(500,300,15,0,2*Math.PI);
+ctx.arc(ballYcord,ballXcord,15,0,2*Math.PI);
 ctx.fillStyle = "white";
 ctx.fill();
 ctx.font= "80px Veranda";
@@ -65,7 +68,7 @@ function draw(){
 	ctx.linewidth="5";
 	ctx.strokeStyle="black";
 	ctx.beginPath();
-	ctx.arc(500,300,15,0,2*Math.PI);
+	ctx.arc(ballYcord,ballXcord,15,0,2*Math.PI);
 	ctx.fillStyle = "white";
 	ctx.fill();
 	ctx.font= "80px Veranda";
@@ -75,8 +78,15 @@ function draw(){
 }
 
 function update(){
-	if (keyWPressed){
+	if (keyWPressed && leftHeight != 0){
 		leftHeight = leftHeight - 5;
+	}else if (keySPressed && leftHeight != 450){
+		leftHeight = leftHeight + 5;
+	}
+	if (keyArrowUpPressed && rightHeight != 0){
+		rightHeight = rightHeight - 5;
+	}else if (keyArrowDownPressed && rightHeight != 450){
+		rightHeight = rightHeight + 5;
 	}
 }
 
@@ -88,21 +98,14 @@ function gameloop(){
 
 window.addEventListener('keydown', gameloop());
 
+// window.addEventListener('keyup', reset());
+// function reset(){
+// 	keyWPressed = false;
+// 	keySPressed = false;
+// 	keyArrowUpPressed = false;
+// 	keyArrowDownPressed = false;
+// }
 
-/*so ctx.fillRect can draw over the current canvas, but it'll take the color of the last fillStyle color. So inorder to move the paddle up, we'll have to first redraw the the paddle up 10px in white, and then draw the last bit of the paddle in black, let's simulate the paddle moving up
-
-if the paddle starts at the coordinates (20,225,20,150)
-
-moving up 10px would be 
-(20,220,20,145)
-
-but we'll have to erase the trail left behind, so we'll change the color to black, 
-
-ctx.fillStyle = "#000000";
-and then do 
-
-(20,370,20,15) 
-*/
 
 
 </script>
