@@ -58,6 +58,18 @@ window.addEventListener('keydown', function (evt) {
 	}
 });
 
+window.addEventListener('keyup', function (evt){
+	if (evt.keyCode === 87) {
+		keyWPressed = false;
+	} else if (evt.keyCode === 83) {
+		keySPressed = false;
+	} else if (evt.keyCode === 38) { // up arrow
+		keyArrowUpPressed = false;
+	} else if (evt.keyCode === 40) {  // down arrow
+		keyArrowDownPressed = false;
+	}
+});
+
 function draw(){
 	ctx.fillStyle = "#000000";
 	ctx.fillRect(0,0,1000,600);
@@ -78,16 +90,17 @@ function draw(){
 }
 
 function update(){
-	if (keyWPressed && leftHeight != 0){
+	if (keyWPressed && leftHeight > 0){
 		leftHeight = leftHeight - 5;
-	}else if (keySPressed && leftHeight != 450){
+	}else if (keySPressed && leftHeight < 450){
 		leftHeight = leftHeight + 5;
 	}
-	if (keyArrowUpPressed && rightHeight != 0){
+	if (keyArrowUpPressed && rightHeight > 0){
 		rightHeight = rightHeight - 5;
-	}else if (keyArrowDownPressed && rightHeight != 450){
+	}else if (keyArrowDownPressed && rightHeight < 450){
 		rightHeight = rightHeight + 5;
 	}
+
 }
 
 function gameloop(){
@@ -98,7 +111,6 @@ function gameloop(){
 
 window.addEventListener('keydown', gameloop());
 
-// window.addEventListener('keyup', reset());
 // function reset(){
 // 	keyWPressed = false;
 // 	keySPressed = false;
@@ -106,6 +118,7 @@ window.addEventListener('keydown', gameloop());
 // 	keyArrowDownPressed = false;
 // }
 
+/*where am I getting stuck?*/
 
 
 </script>
