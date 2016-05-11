@@ -11,9 +11,11 @@ var c = document.getElementById("laCanvas");
 var ctx = c.getContext("2d");
 var leftHeight = 225;
 var rightHeight = 225;
-var ballYcord = 500;
-var ballXcord = 300;
+var ballXcord = 500;
+var ballYcord = 300;
 var ballDirectionSlope = Math.random();
+var dY = 5;
+var dX = 5;
 
 ctx.fillStyle = "#000000";
 ctx.fillRect(0,0,1000,600);
@@ -24,7 +26,7 @@ ctx.beginPath();
 ctx.linewidth="5";
 ctx.strokeStyle="black";
 ctx.beginPath();
-ctx.arc(ballYcord,ballXcord,15,0,2*Math.PI);
+ctx.arc(ballXcord,ballYcord,15,0,2*Math.PI);
 ctx.fillStyle = "white";
 ctx.fill();
 ctx.font= "80px Veranda";
@@ -80,7 +82,7 @@ function draw(){
 	ctx.linewidth="5";
 	ctx.strokeStyle="black";
 	ctx.beginPath();
-	ctx.arc(ballYcord,ballXcord,15,0,2*Math.PI);
+	ctx.arc(ballXcord,ballYcord,15,0,2*Math.PI);
 	ctx.fillStyle = "white";
 	ctx.fill();
 	ctx.font= "80px Veranda";
@@ -92,14 +94,24 @@ function draw(){
 function update(){
 	if (keyWPressed && leftHeight > 0){
 		leftHeight = leftHeight - 5;
-	}else if (keySPressed && leftHeight < 450){
+	} else if (keySPressed && leftHeight < 450){
 		leftHeight = leftHeight + 5;
 	}
 	if (keyArrowUpPressed && rightHeight > 0){
 		rightHeight = rightHeight - 5;
-	}else if (keyArrowDownPressed && rightHeight < 450){
+	} else if (keyArrowDownPressed && rightHeight < 450){
 		rightHeight = rightHeight + 5;
 	}
+
+	if (ballYcord < 0 || ballYcord > 600){
+		dY = -dY;
+	}
+	if (ballXcord < 0 || ballXcord > 1000){
+		dX = -dX;
+	}
+
+	ballYcord += dY;
+	ballXcord += dX;
 
 }
 
