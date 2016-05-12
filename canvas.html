@@ -17,8 +17,9 @@ var rightPaddleX = 960;
 var rightPaddleY = 225;
 var rightPaddleWidth = 20;
 var rightPaddleHeight = 150;
-var ballXcord = 500;
-var ballYcord = 300;
+var ballCenterX = 500;
+var ballCenterY = 300;
+var ballRadius = 15;
 var dY = 5;
 var dX = 5;
 
@@ -31,7 +32,7 @@ ctx.beginPath();
 ctx.linewidth="5";
 ctx.strokeStyle="black";
 ctx.beginPath();
-ctx.arc(ballXcord,ballYcord,15,0,2*Math.PI);
+ctx.arc(ballCenterX,ballCenterY,ballRadius,0,2*Math.PI);
 ctx.fillStyle = "white";
 ctx.fill();
 ctx.font= "80px Veranda";
@@ -87,7 +88,7 @@ function draw(){
 	ctx.linewidth="5";
 	ctx.strokeStyle="black";
 	ctx.beginPath();
-	ctx.arc(ballXcord,ballYcord,15,0,2*Math.PI);
+	ctx.arc(ballCenterX,ballCenterY,ballRadius,0,2*Math.PI);
 	ctx.fillStyle = "magenta";
 	ctx.fill();
 	ctx.font= "80px Veranda";
@@ -108,42 +109,42 @@ function update(){
 		rightPaddleY = rightPaddleY + 5;
 	}
 
-	if (ballYcord < 0 || ballYcord > 600){
+	if (ballCenterY < 0 || ballCenterY > 600){
 		dY = -dY;
 	}
-	if (ballXcord < 0 || ballXcord > 1000){
+	if (ballCenterX < 0 || ballCenterX > 1000){
 		dX = -dX;
 	}
 
-	ballYcord += dY;
-	ballXcord += dX;
+	ballCenterY += dY;
+	ballCenterX += dX;
 
 }
 
+
 function gameloop(){
 	update();
-	// isColliding(ballXcord,ballYcord,leftPaddleX,leftPaddleY,leftPaddleWidth,leftPaddleHeight);
+	isColliding(ballCenterX,ballCenterY,ballRadius,ballRadius,leftPaddleX,leftPaddleY,leftPaddleWidth,leftPaddleHeight);
+	isColliding(ballCenterX,ballCenterY,ballRadius,ballRadius,rightPaddleX,rightPaddleY,rightPaddleWidth,rightPaddleHeight);
 	draw();
 	window.requestAnimationFrame(gameloop);
 }
 
 window.addEventListener('keyup', gameloop());
 
-/*5/12 stating collide detection*/
-
-Number.prototype.between = function (min, max) {
-    return this >= min && this <= max;
-};
 
 
-// if ((ballXcord).between(leftPaddleX, leftPaddleX + leftPaddleWidth) && (ballYcord.between(leftPaddleY, leftPaddleY + leftPaddleHeight))) {
+
+// if ((ballCenterX).between(leftPaddleX, leftPaddleX + leftPaddleWidth) && (ballCenterY.between(leftPaddleY, leftPaddleY + leftPaddleHeight))) {
 //     alert('collided!');
 // }
-function isColliding(x1,y1,x2,y2,width2,height2){
-	if ((x1).between(x2, x2 + width2) && (y1.between(y2, y2 + height2))) {
-    	console.log('collided!');
-	}else {
-		console.log('didn\'t touch');
+function isColliding(x1,y1,radius,radius,x2,y2,width2,height2){
+	// if ((x1).between(x2, x2 + width2) && (y1.between(y2, y2 + height2))) {
+ //    	console.log('collided!');
+	// }
+	if ((x1 - radius <= x2 + width2 && x2 <= x1 + radius) && (y1 - radius <= y2 + height2 && y2 <= y1 + radius)){
+		dY = -dY;
+		dX = -dX;
 	}
 }
 
