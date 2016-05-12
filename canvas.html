@@ -116,7 +116,11 @@ function update(){
 	if (ballCenterY - ballRadius < 0 || ballCenterY + ballRadius > 600){
 		dY = -dY;
 	}
-	if (ballCenterX - ballRadius < 0 || ballCenterX - ballRadius > 1000){
+	if (ballCenterX - ballRadius < 0 ){
+		rightPlayerScore = rightPlayerScore + 1;
+		dX = -dX;
+	} else if (ballCenterX + ballRadius > 1000){
+		leftPlayerScore = leftPlayerScore + 1;
 		dX = -dX;
 	}
 
