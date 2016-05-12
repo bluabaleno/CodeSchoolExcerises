@@ -132,7 +132,7 @@ window.addEventListener('keyup', gameloop());
 /*5/12 stating collide detection*/
 
 Number.prototype.between = function (min, max) {
-    return this > min && this < max;
+    return this >= min && this <= max;
 };
 
 
