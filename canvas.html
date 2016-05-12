@@ -9,8 +9,8 @@
 <script>
 var c = document.getElementById("laCanvas");
 var ctx = c.getContext("2d");
-var leftHeight = 225;
-var rightHeight = 225;
+var leftPaddleY = 225;
+var rightPaddleY = 225;
 var ballXcord = 500;
 var ballYcord = 300;
 var ballDirectionSlope = Math.random();
@@ -20,8 +20,8 @@ var dX = 5;
 ctx.fillStyle = "#000000";
 ctx.fillRect(0,0,1000,600);
 ctx.fillStyle = "#FFFFFF";
-leftPaddle = ctx.fillRect(20,leftHeight,20,150);
-rightPaddle = ctx.fillRect(960,rightHeight,20,150);
+leftPaddle = ctx.fillRect(20,leftPaddleY,20,150);
+rightPaddle = ctx.fillRect(960,rightPaddleY,20,150);
 ctx.beginPath();
 ctx.linewidth="5";
 ctx.strokeStyle="black";
@@ -76,14 +76,14 @@ function draw(){
 	ctx.fillStyle = "#000000";
 	ctx.fillRect(0,0,1000,600);
 	ctx.fillStyle = "#FFFFFF";
-	leftPaddle = ctx.fillRect(20,leftHeight,20,150);
-	rightPaddle = ctx.fillRect(960,rightHeight,20,150);
+	leftPaddle = ctx.fillRect(20,leftPaddleY,20,150);
+	rightPaddle = ctx.fillRect(960,rightPaddleY,20,150);
 	ctx.beginPath();
 	ctx.linewidth="5";
 	ctx.strokeStyle="black";
 	ctx.beginPath();
 	ctx.arc(ballXcord,ballYcord,15,0,2*Math.PI);
-	ctx.fillStyle = "white";
+	ctx.fillStyle = "magenta";
 	ctx.fill();
 	ctx.font= "80px Veranda";
 	ctx.fillStyle= "white";
@@ -92,15 +92,15 @@ function draw(){
 }
 
 function update(){
-	if (keyWPressed && leftHeight > 0){
-		leftHeight = leftHeight - 5;
-	} else if (keySPressed && leftHeight < 450){
-		leftHeight = leftHeight + 5;
+	if (keyWPressed && leftPaddleY > 0){
+		leftPaddleY = leftPaddleY - 5;
+	} else if (keySPressed && leftPaddleY < 450){
+		leftPaddleY = leftPaddleY + 5;
 	}
-	if (keyArrowUpPressed && rightHeight > 0){
-		rightHeight = rightHeight - 5;
-	} else if (keyArrowDownPressed && rightHeight < 450){
-		rightHeight = rightHeight + 5;
+	if (keyArrowUpPressed && rightPaddleY > 0){
+		rightPaddleY = rightPaddleY - 5;
+	} else if (keyArrowDownPressed && rightPaddleY < 450){
+		rightPaddleY = rightPaddleY + 5;
 	}
 
 	if (ballYcord < 0 || ballYcord > 600){
@@ -121,18 +121,27 @@ function gameloop(){
 	window.requestAnimationFrame(gameloop);
 }
 
-window.addEventListener('keydown', gameloop());
+window.addEventListener('keyup', gameloop());
 
-// function reset(){
+// function isColliding(x1,y1,width1,height1,x2,y2,width2,height2){
+// 	if ( )
+// }
+
+	// Returns true if the two rectangles overlap, false otherwise.
+	// The rectangles are specified by their top-left (x, y) coord and their widths and heights.
+
+//  function reset(){
 // 	keyWPressed = false;
 // 	keySPressed = false;
 // 	keyArrowUpPressed = false;
 // 	keyArrowDownPressed = false;
 // }
 
-/*where am I getting stuck?*/
+/*kinks:
+1.Stop the ball from moving right.
+*/
 
 
 </script>
 </head>
-</html>
+</html> 
