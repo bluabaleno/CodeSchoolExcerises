@@ -22,6 +22,8 @@ var ballCenterY = 300;
 var ballRadius = 15;
 var dY = 5;
 var dX = 5;
+var leftPlayerScore = 0;
+var rightPlayerScore = 0;
 
 ctx.fillStyle = "#000000";
 ctx.fillRect(0,0,1000,600);
@@ -37,7 +39,8 @@ ctx.fillStyle = "white";
 ctx.fill();
 ctx.font= "80px Veranda";
 ctx.fillStyle= "white";
-ctx.fillText("0 0",450,70);
+ctx.fillText(leftPlayerScore,450,70);
+ctx.fillText(rightPlayerScore,500,70);
 
 var keyWPressed = false;
 var keySPressed = false;
@@ -93,7 +96,8 @@ function draw(){
 	ctx.fill();
 	ctx.font= "80px Veranda";
 	ctx.fillStyle= "white";
-	ctx.fillText("0 0",450,70);
+	ctx.fillText(leftPlayerScore,450,70);
+	ctx.fillText(rightPlayerScore,500,70);
 
 }
 
@@ -109,10 +113,10 @@ function update(){
 		rightPaddleY = rightPaddleY + 5;
 	}
 
-	if (ballCenterY < 0 || ballCenterY > 600){
+	if (ballCenterY - ballRadius < 0 || ballCenterY + ballRadius > 600){
 		dY = -dY;
 	}
-	if (ballCenterX < 0 || ballCenterX > 1000){
+	if (ballCenterX - ballRadius < 0 || ballCenterX - ballRadius > 1000){
 		dX = -dX;
 	}
 
