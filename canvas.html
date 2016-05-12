@@ -9,19 +9,24 @@
 <script>
 var c = document.getElementById("laCanvas");
 var ctx = c.getContext("2d");
+var leftPaddleX = 20;
 var leftPaddleY = 225;
+var leftPaddleWidth = 20;
+var leftPaddleHeight = 150;
+var rightPaddleX = 960;
 var rightPaddleY = 225;
+var rightPaddleWidth = 20;
+var rightPaddleHeight = 150;
 var ballXcord = 500;
 var ballYcord = 300;
-var ballDirectionSlope = Math.random();
 var dY = 5;
 var dX = 5;
 
 ctx.fillStyle = "#000000";
 ctx.fillRect(0,0,1000,600);
 ctx.fillStyle = "#FFFFFF";
-leftPaddle = ctx.fillRect(20,leftPaddleY,20,150);
-rightPaddle = ctx.fillRect(960,rightPaddleY,20,150);
+leftPaddle = ctx.fillRect(leftPaddleX,leftPaddleY,leftPaddleWidth,leftPaddleHeight);
+rightPaddle = ctx.fillRect(rightPaddleX,rightPaddleY,rightPaddleWidth,rightPaddleHeight);
 ctx.beginPath();
 ctx.linewidth="5";
 ctx.strokeStyle="black";
@@ -76,8 +81,8 @@ function draw(){
 	ctx.fillStyle = "#000000";
 	ctx.fillRect(0,0,1000,600);
 	ctx.fillStyle = "#FFFFFF";
-	leftPaddle = ctx.fillRect(20,leftPaddleY,20,150);
-	rightPaddle = ctx.fillRect(960,rightPaddleY,20,150);
+	leftPaddle = ctx.fillRect(leftPaddleX,leftPaddleY,leftPaddleWidth,leftPaddleHeight);
+	rightPaddle = ctx.fillRect(rightPaddleX,rightPaddleY,rightPaddleWidth,rightPaddleHeight);
 	ctx.beginPath();
 	ctx.linewidth="5";
 	ctx.strokeStyle="black";
@@ -117,15 +122,30 @@ function update(){
 
 function gameloop(){
 	update();
+	// isColliding(ballXcord,ballYcord,leftPaddleX,leftPaddleY,leftPaddleWidth,leftPaddleHeight);
 	draw();
 	window.requestAnimationFrame(gameloop);
 }
 
 window.addEventListener('keyup', gameloop());
 
-// function isColliding(x1,y1,width1,height1,x2,y2,width2,height2){
-// 	if ( )
+/*5/12 stating collide detection*/
+
+Number.prototype.between = function (min, max) {
+    return this > min && this < max;
+};
+
+
+// if ((ballXcord).between(leftPaddleX, leftPaddleX + leftPaddleWidth) && (ballYcord.between(leftPaddleY, leftPaddleY + leftPaddleHeight))) {
+//     alert('collided!');
 // }
+function isColliding(x1,y1,x2,y2,width2,height2){
+	if ((x1).between(x2, x2 + width2) && (y1.between(y2, y2 + height2))) {
+    	console.log('collided!');
+	}else {
+		console.log('didn\'t touch');
+	}
+}
 
 	// Returns true if the two rectangles overlap, false otherwise.
 	// The rectangles are specified by their top-left (x, y) coord and their widths and heights.
