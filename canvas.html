@@ -24,6 +24,8 @@ var dY = 5;
 var dX = 5;
 var leftPlayerScore = 0;
 var rightPlayerScore = 0;
+var winner = false;
+
 
 ctx.fillStyle = "#000000";
 ctx.fillRect(0,0,1000,600);
@@ -64,7 +66,8 @@ window.addEventListener('keydown', function (evt) {
 	} else if (evt.keyCode === 82) {  // 'r'
 	    // when a player has won, hitting 'r' resets the game
 		if (winner) {
-			restartGame();
+			// restartGame();
+			console.log("winner!")
 		}
 	}
 });
@@ -118,9 +121,17 @@ function update(){
 	}
 	if (ballCenterX - ballRadius < 0 ){
 		rightPlayerScore = rightPlayerScore + 1;
+		//reset game after player score.
+		// if (rightPlayerScore = 5){
+		// 	winner = true;
+		// }
 		dX = -dX;
 	} else if (ballCenterX + ballRadius > 1000){
 		leftPlayerScore = leftPlayerScore + 1;
+		// if (leftPlayerScore = 5){
+		// 	winner = true;
+		// 	console.log("winner!");
+		// }
 		dX = -dX;
 	}
 
@@ -151,6 +162,12 @@ function isColliding(x1,y1,radius,radius,x2,y2,width2,height2){
 
 /*kinks:
 1.Stop the ball from moving right.
+
+Notes:
+
+5/12:
+-start working on counting score when the ball touches the left/right wall. For some reason once it touch it goes to 5 points right away.
+commented out that section of the code for now.
 */
 
 
