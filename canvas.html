@@ -20,8 +20,8 @@ var rightPaddleHeight = 150;
 var ballCenterX = 500;
 var ballCenterY = 300;
 var ballRadius = 15;
-var dY = 7;
-var dX = 7;
+var dY = 3;
+var dX = 3;
 var leftPlayerScore = 0;
 var rightPlayerScore = 0;
 var winner = false;
@@ -66,8 +66,9 @@ window.addEventListener('keydown', function (evt) {
 	} else if (evt.keyCode === 82) {  // 'r'
 	    // when a player has won, hitting 'r' resets the game
 		if (winner) {
-			// restartGame();
-			console.log("winner!")
+			restartGame();
+		}else {
+			console.log("no winner yet");
 		}
 	}
 });
@@ -115,7 +116,6 @@ function update(){
 	} else if (keyArrowDownPressed && rightPaddleY < 450){
 		rightPaddleY = rightPaddleY + 5;
 	}
-
 	if (ballCenterY - ballRadius < 0 || ballCenterY + ballRadius > 600){
 		dY = -dY;
 	}
@@ -143,6 +143,25 @@ function update(){
 	isColliding(ballCenterX,ballCenterY,ballRadius,ballRadius,rightPaddleX,rightPaddleY,rightPaddleWidth,rightPaddleHeight);
 }
 
+function restartGame(){
+	leftPaddleX = 20;
+	leftPaddleY = 225;
+	leftPaddleWidth = 20;
+	leftPaddleHeight = 150;
+	rightPaddleX = 960;
+	rightPaddleY = 225;
+	rightPaddleWidth = 20;
+	rightPaddleHeight = 150;
+	ballCenterX = 500;
+	ballCenterY = 300;
+	ballRadius = 15;
+	dY = 3;
+	dX = 3;
+	leftPlayerScore = 0;
+	rightPlayerScore = 0;
+	winner = false;
+	draw();
+}
 
 function gameloop(){
 	update();
