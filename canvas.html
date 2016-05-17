@@ -20,8 +20,8 @@ var rightPaddleHeight = 150;
 var ballCenterX = 500;
 var ballCenterY = 300;
 var ballRadius = 15;
-var dY = 5;
-var dX = 5;
+var dY = 7;
+var dX = 7;
 var leftPlayerScore = 0;
 var rightPlayerScore = 0;
 var winner = false;
@@ -85,9 +85,9 @@ window.addEventListener('keyup', function (evt){
 });
 
 function draw(){
-	ctx.fillStyle = "#000000";
+	ctx.fillStyle = "black";
 	ctx.fillRect(0,0,1000,600);
-	ctx.fillStyle = "#FFFFFF";
+	ctx.fillStyle = "lightblue";
 	leftPaddle = ctx.fillRect(leftPaddleX,leftPaddleY,leftPaddleWidth,leftPaddleHeight);
 	rightPaddle = ctx.fillRect(rightPaddleX,rightPaddleY,rightPaddleWidth,rightPaddleHeight);
 	ctx.beginPath();
@@ -95,7 +95,7 @@ function draw(){
 	ctx.strokeStyle="black";
 	ctx.beginPath();
 	ctx.arc(ballCenterX,ballCenterY,ballRadius,0,2*Math.PI);
-	ctx.fillStyle = "magenta";
+	ctx.fillStyle = "turquoise";
 	ctx.fill();
 	ctx.font= "80px Veranda";
 	ctx.fillStyle= "white";
