@@ -1,0 +1,33 @@
+Q: If I have 10 bits, how many unique values can I represent?
+
+A:
+
+============
+
+Q: What is 0x52AB9 in binary?
+
+A:
+
+============
+
+Q: What is 10011101101b in hex?
+
+A:
+
+============
+
+Q: Express -9 in one's complement form.
+
+A:
+
+============
+
+Q: Express -9 in two's complement form.
+
+A:
+
+============
+
+Q: Approximate 362 in floating point with 6 mantissa bits and 8 exponent bits (in excess-128 form).
+
+A:
