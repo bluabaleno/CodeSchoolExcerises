@@ -122,16 +122,17 @@ function update(){
 	if (ballCenterX - ballRadius < 0 ){
 		rightPlayerScore = rightPlayerScore + 1;
 		//reset game after player score.
-		// if (rightPlayerScore = 5){
-		// 	winner = true;
-		// }
+		if (rightPlayerScore >= 5){
+			winner = true;
+			console.log("winner");
+		}
 		dX = -dX;
 	} else if (ballCenterX + ballRadius > 1000){
 		leftPlayerScore = leftPlayerScore + 1;
-		// if (leftPlayerScore = 5){
-		// 	winner = true;
-		// 	console.log("winner!");
-		// }
+		if (leftPlayerScore >= 5){
+			winner = true;
+			console.log("winner!");
+		}
 		dX = -dX;
 	}
 
