@@ -1,0 +1,94 @@
+Q: By convention, this number is in what number base?
+
+	03572
+
+A: Octal
+
+============
+
+Q: By convention, this number is in what number base?
+
+	0x3572
+
+A: Hex
+
+============
+
+Q: What is the decimal equivalent of this octal number? 
+
+	042
+
+A: 34
+
+============
+
+Q: What is the decimal equivalent of this octal number? 
+
+	0142
+
+A: 97
+
+============
+
+Q: What is the decimal equivalent of this hex number?
+
+	0x3B	
+
+A: 59
+
+============
+
+Q: What is the decimal equivalent of this hex number?
+
+	0x23B
+
+A: 571
+
+============
+
+Q: What is the hex equivalent of this decimal number?
+
+	64
+
+A: 0x40
+
+============
+
+Q: What is the hex equivalent of this decimal number?
+
+	70
+
+A: 0x46
+
+============
+
+Q: What are the first 10 powers of 2?
+
+A: 2,4,8,16,32,64,128,256,512,1024
+
+============
+
+Q: What is the decimal equivalent of this binary number?
+
+	1001b
+
+A: 10
+
+============
+
+Q: What is the decimal equivalent of this binary number?
+
+	100011b
+
+A: 38
+
+============
+
+Q: What is the binary equivalent of this decimal number?
+
+	100
+
+A: 1100100
+
+============
+
