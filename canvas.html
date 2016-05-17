@@ -67,8 +67,6 @@ window.addEventListener('keydown', function (evt) {
 	    // when a player has won, hitting 'r' resets the game
 		if (winner) {
 			restartGame();
-		}else {
-			console.log("no winner yet");
 		}
 	}
 });
@@ -103,6 +101,11 @@ function draw(){
 	ctx.fillText(leftPlayerScore,450,70);
 	ctx.fillText(rightPlayerScore,500,70);
 
+	if (winner){
+		ctx.font= "50px Veranda";
+		ctx.fillText("Game over, press 'r' to restart.",180,300);
+	}
+
 }
 
 function update(){
@@ -124,14 +127,12 @@ function update(){
 		//reset game after player score.
 		if (rightPlayerScore >= 5){
 			winner = true;
-			console.log("winner");
 		}
 		dX = -dX;
 	} else if (ballCenterX + ballRadius > 1000){
 		leftPlayerScore = leftPlayerScore + 1;
 		if (leftPlayerScore >= 5){
 			winner = true;
-			console.log("winner!");
 		}
 		dX = -dX;
 	}
@@ -185,9 +186,8 @@ function isColliding(x1,y1,radius,radius,x2,y2,width2,height2){
 
 Notes:
 
-5/12:
--start working on counting score when the ball touches the left/right wall. For some reason once it touch it goes to 5 points right away.
-commented out that section of the code for now.
+5/17:
+still need to work on displaying winning message.
 */
 
 
