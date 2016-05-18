@@ -1,0 +1,51 @@
+Q: How does an I/O device get the attention of the CPU?
+
+A: through interruptions. The CPU will write what it is doing onto memory, and then read the register of the I/O device and look up on its interruption table as to know what to do.
+
+
+============
+
+Q: Which special program is responsible for handling interrupts and exceptions?
+
+A: interrupt handler and exception handler
+
+============
+
+Q: Why will code written for an x86 processor not run on an ARM processor?
+
+A: no, they'll have different Instruction sets.
+
+============
+
+Q: Does address 0 always correspond to the first byte of RAM?
+
+A: no, 
+
+============
+
+Q: When data is copied between RAM and CPU registers, it is usually copied through ___.
+
+A: the CPU cache 
+
+============
+
+
+Q: When we copy 32-bit register A to address 500 of memory on a big-endian machine, the least-significant byte of register A is copied to address ___.
+
+
+A: 531
+
+============
+
+
+Q: When we copy 32-bit register A to address 500 of memory on a little-endian machine, the least-significant byte of register A is copied to address ___.
+
+A: 500
+
+============
+
+Q: When we say a machine is 32-bit or 64-bit, what are we usually talking about?
+
+A: the bits that the processor have to store instruction set. It is also the memory address length that the processor can use to read/write data.
+
+============ 

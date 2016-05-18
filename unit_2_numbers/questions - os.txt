@@ -1,0 +1,60 @@
+Q: A ___ is a module of the OS that controls a specific device.
+
+
+A:  device register
+
+=============
+
+Q: The ___ scheduler is the part of OS that determines when processes run on the CPU cores.
+
+
+A: scheduler
+
+=============
+
+Q: What stops a program from using a CPU without letting other programs from using it too. 
+
+A: 
+
+=============
+
+Q: A process makes requests to the OS by invoking a _____.
+
+A: system call
+
+=============
+
+Q: The memory used by a process is split into what three main sections?
+
+A: text, heap and stack
+
+=============
+
+Q: The OS maps 'virtual addresses' to 'physical addresses' in chunks called ___. These chunks are typically __ KB in size.
+
+A: heaps, 
+
+=============
+
+Q: A process that is not readg to continue because it is waiting for some event to occur (such as waiting for data to be read off a disk), such a process is in the ____ state.
+
+A: blocked
+
+=============
+
+Q: The storage area of a storage device is divided into one more logical sections called ___.
+
+A: heaps
+
+=============
+
+
+Q: Each partition has one special directory called its ___ directory.
+
+A: 
+
+=============
+
+Q. Say on Unix system, we have two partitions: one mounted to /, the other mounted to /apple/banana. Which partition must have been mounted first? 
+
+A. 

@@ -1,0 +1,53 @@
+Q: How many characters are in the ASCII character set?
+
+A:
+
+================
+
+Q: What are the six whitespace characters of ASCII? (HINT: I left out one in my slides. Consult an ASCII table.)
+
+A:
+
+================
+
+Q: What is the difference between a character and a glyph?
+
+A:
+
+================
+
+Q: How would "Hi, pal!" be represented as bits in ASCII? (Assume 8-bits per character and give the answer in hex.) (HINT: Consult an ASCII table to find the hex values of each character.)
+
+A:
+
+================
+
+Q: How many 'planes' in Unicode, and how many 'code points' does each plane have?
+
+A:
+
+================
+
+Q: The characters of all modern, human languages fit in the first plane (the Basic Multilingual Plane) except for what three languages?
+
+A:
+
+================
+
+Q: How would we represent "Hi, pal!" in UTF-32? (Give the answer in hex.)
+
+A:
+
+================
+
+Q: How would we represent "Hi, pal!" in UTF-8? (Give the answer in hex.)
+
+A:
+
+================
+
+Q: How would we represent code point 3C11 in UTF-8? (Give the answer in binary.)
+
+A:
+
+================
