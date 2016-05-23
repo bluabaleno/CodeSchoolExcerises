@@ -1,53 +1,64 @@
 Q: How many characters are in the ASCII character set?
 
-A:
+A:128
 
 ================
 
 Q: What are the six whitespace characters of ASCII? (HINT: I left out one in my slides. Consult an ASCII table.)
 
-A:
+A: horizontal tab, vertical tab, line feed, carriage return, form feed, space
 
 ================
 
 Q: What is the difference between a character and a glyph?
 
-A:
+A: a character is an abstract unit of the written language whereas a glyph is a visual representation of the character
 
 ================
 
 Q: How would "Hi, pal!" be represented as bits in ASCII? (Assume 8-bits per character and give the answer in hex.) (HINT: Consult an ASCII table to find the hex values of each character.)
 
-A:
+A: in Hex numbers it would be 48 69 2C 20 70 61 6C 21
+
+so in binary it would be 
+
+0100_1000 0110_1001 0010_1100 0010_0000 0111_0000 0110_0001 0110_1100 0010_0001 
 
 ================
 
 Q: How many 'planes' in Unicode, and how many 'code points' does each plane have?
 
-A:
+A: 17, with each plane having 2^16 codepoints or 65,536
 
 ================
 
 Q: The characters of all modern, human languages fit in the first plane (the Basic Multilingual Plane) except for what three languages?
 
-A:
+A: Chinese, Japanese, Korean
 
 ================
 
 Q: How would we represent "Hi, pal!" in UTF-32? (Give the answer in hex.)
 
-A:
+A: U+0048 U+0069 U+002C U+0020 U+0070 U+0061 U+006C U+0021 
 
+// adding three leading zeros before each character
+U+ is the codepoint and 0000_0000 is the byte, each 0 is a bit
+// converting from 2 HEX to 8bytes
+// answer: 0000_0048 00000069 0000002C 00000020 00000070 00000061 0000006C 00000021
 ================
 
 Q: How would we represent "Hi, pal!" in UTF-8? (Give the answer in hex.)
 
-A:
+A: same as in UTF-32
+//same as ASCII not UTF-32
 
 ================
 
 Q: How would we represent code point 3C11 in UTF-8? (Give the answer in binary.)
 
-A:
+A: 3C11 is between U+0800 and U+FFFF
+
+1110_0011 1011_0000 1001_0001
 
 ================

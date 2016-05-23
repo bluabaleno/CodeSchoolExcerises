@@ -1,20 +1,20 @@
 Q: A ___ is a module of the OS that controls a specific device.
 
 
-A:  device register
+A:  device driver
 
 =============
 
 Q: The ___ scheduler is the part of OS that determines when processes run on the CPU cores.
 
 
-A: scheduler
+A: scheduler (uses round robin algorithmn)
 
 =============
 
 Q: What stops a program from using a CPU without letting other programs from using it too. 
 
-A: 
+A: interrupt?
 
 =============
 
@@ -26,13 +26,13 @@ A: system call
 
 Q: The memory used by a process is split into what three main sections?
 
-A: text, heap and stack
+A: text(the code), heap(everything else) and stack(local variables)
 
 =============
 
 Q: The OS maps 'virtual addresses' to 'physical addresses' in chunks called ___. These chunks are typically __ KB in size.
 
-A: heaps, 
+A: page, 4KB
 
 =============
 
@@ -44,17 +44,26 @@ A: blocked
 
 Q: The storage area of a storage device is divided into one more logical sections called ___.
 
-A: heaps
+A: partitions
 
 =============
 
 
 Q: Each partition has one special directory called its ___ directory.
 
-A: 
+A: root directory
 
 =============
 
 Q. Say on Unix system, we have two partitions: one mounted to /, the other mounted to /apple/banana. Which partition must have been mounted first? 
 
-A. 
+A. / - the root directory
+
+the Unix system differs from the Windos system in that it has a root directory of /, and everything else is a sub-parition/directory of that parition.
+
+IPC(Interprocess Communication)
+files
+pipes
+sockets
+signals
+shared memory

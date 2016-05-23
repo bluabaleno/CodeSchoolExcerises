@@ -1,0 +1,289 @@
+<html>
+<head>
+<title>Pong</title>
+</head>
+<body>
+<canvas id="PongCanvas"/>
+</body>
+<script>
+
+
+var canvas = document.getElementById('PongCanvas');
+var context = canvas.getContext('2d');
+
+var WIDTH = 1000;
+var HEIGHT = 600;
+
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
+
+var BALL_RADIUS = 15;
+
+var SCORE_MARGIN = 10;
+
+var BALL_START_SPEED_SQRD = 60;
+var SPEED_INCREASE_RATE = 1.3;
+var MAX_BALL_SPEED_SQRD = 320;
+
+var WINNING_SCORE = 7;
+
+var PADDLE_WIDTH = 15;
+var PADDLE_HEIGHT = 120;
+var PADDLE_DISTANCE_FROM_WALL = 20;
+
+var MAX_STRIKE_Y = (PADDLE_HEIGHT / 2) + BALL_RADIUS;
+var DELTA_Y_MAX = 6.8;
+
+var LEFT_PADDLE_X = PADDLE_DISTANCE_FROM_WALL + (PADDLE_WIDTH / 2);
+var RIGHT_PADDLE_X = WIDTH - PADDLE_DISTANCE_FROM_WALL - (PADDLE_WIDTH / 2);
+
+var leftPaddleY = HEIGHT / 2;
+var rightPaddleY = HEIGHT / 2;
+
+
+var ballX = WIDTH / 2;
+var ballY = HEIGHT / 2;
+
+var deltaX = 5.3;
+var deltaY = -2.6;
+
+var ballSpeedSqrd = BALL_START_SPEED_SQRD;
+
+
+
+var keyWPressed = false;
+var keySPressed = false;
+var keyArrowUpPressed = false;
+var keyArrowDownPressed = false;
+
+var leftPlayerScore = 0;
+var rightPlayerScore = 0;
+
+
+
+
+function resetBall() {
+	ballX = WIDTH / 2;
+	ballY = HEIGHT / 2;
+
+	ballSpeedSqrd = BALL_START_SPEED_SQRD;
+
+	deltaY = Math.random() * (DELTA_Y_MAX * 2) - DELTA_Y_MAX;  // random between [-DELTA_Y_MAX, +DELTA_Y_MAX]
+	var deltaX_magnitude = Math.sqrt(ballSpeedSqrd - deltaY * deltaY);
+	// reverse direction on X axis
+	deltaX = (Math.random() > 0.5) ? -deltaX_magnitude : deltaX_magnitude;
+}
+
+function increaseBallSpeed() {
+	ballSpeedSqrd *= SPEED_INCREASE_RATE;
+	if (ballSpeedSqrd > MAX_BALL_SPEED_SQRD) {
+		ballSpeedSqrd = MAX_BALL_SPEED_SQRD;
+	}
+}
+
+var PADDLE_MOVE_SPEED = 6.5;
+
+var MAX_PADDLE_Y = HEIGHT - (PADDLE_HEIGHT / 2);
+var MIN_PADDLE_Y = (PADDLE_HEIGHT / 2);
+
+
+function moveLeftPaddle() {
+	if (keyWPressed) {
+		leftPaddleY -= PADDLE_MOVE_SPEED;
+		if (leftPaddleY < MIN_PADDLE_Y) {
+			leftPaddleY = MIN_PADDLE_Y;
+		}
+	} else if (keySPressed) {
+		leftPaddleY += PADDLE_MOVE_SPEED;
+		if (leftPaddleY > MAX_PADDLE_Y) {
+			leftPaddleY = MAX_PADDLE_Y;
+		}
+	}
+}
+
+
+function moveRightPaddle() {
+	if (keyArrowUpPressed) {
+		rightPaddleY -= PADDLE_MOVE_SPEED;
+		if (rightPaddleY < MIN_PADDLE_Y) {
+			rightPaddleY = MIN_PADDLE_Y;
+		}
+	} else if (keyArrowDownPressed) {
+		rightPaddleY += PADDLE_MOVE_SPEED;
+		if (rightPaddleY > MAX_PADDLE_Y) {
+			rightPaddleY = MAX_PADDLE_Y;
+		}
+	}
+}
+
+var winner = null;
+
+function update() {
+	if (winner) {
+		// do nothing
+	} else {
+		ballX += deltaX;
+		ballY += deltaY;
+
+		moveLeftPaddle();
+		moveRightPaddle();
+
+		// ball strikes floor or ceiling
+	    if ((ballY - BALL_RADIUS) <= 0) {
+			ballY = BALL_RADIUS;
+			deltaY = -deltaY;
+		} else if ((ballY + BALL_RADIUS) >= HEIGHT) {
+			ballY = HEIGHT - BALL_RADIUS;
+			deltaY = -deltaY;
+		}
+
+		// ball strikes side walls
+		if ((ballX - BALL_RADIUS) <= 0) {
+			ballX = BALL_RADIUS;
+			deltaX = -deltaX;
+			rightPlayerScore++;
+			if (rightPlayerScore >= WINNING_SCORE) {
+				winner = 2;
+			}
+			resetBall();
+		} else if ((ballX + BALL_RADIUS) >= WIDTH) {
+			ballX = WIDTH - BALL_RADIUS;
+			deltaX = -deltaX;
+			leftPlayerScore++;
+			if (leftPlayerScore >= WINNING_SCORE) {
+				winner = 1;
+			}
+			resetBall();
+		}
+
+		if (isColliding(ballX, ballY, BALL_RADIUS * 2, BALL_RADIUS * 2,
+		 		LEFT_PADDLE_X, leftPaddleY, PADDLE_WIDTH, PADDLE_HEIGHT)) {
+			// if colliding with left paddle...
+			increaseBallSpeed();
+			// shove ball to non-colliding position
+			ballX = LEFT_PADDLE_X + (PADDLE_WIDTH / 2) + BALL_RADIUS;
+			// determine new x/y speed
+			var strikeY = ballY - leftPaddleY;
+			deltaY = strikeY / MAX_STRIKE_Y * DELTA_Y_MAX;
+			var deltaX_magnitude = Math.sqrt(ballSpeedSqrd - deltaY * deltaY);
+			// reverse direction on X axis
+			deltaX = (deltaX > 0) ? -deltaX_magnitude : deltaX_magnitude;
+		} else if (isColliding(ballX, ballY, BALL_RADIUS * 2, BALL_RADIUS * 2,
+		 		RIGHT_PADDLE_X, rightPaddleY, PADDLE_WIDTH, PADDLE_HEIGHT)) {
+			// if colliding with right paddle...
+			increaseBallSpeed();
+			// shove ball to non-colliding position
+			ballX = RIGHT_PADDLE_X - (PADDLE_WIDTH / 2) - BALL_RADIUS;
+			// determine new x/y speed
+			var strikeY = ballY - rightPaddleY;
+			deltaY = strikeY / MAX_STRIKE_Y * DELTA_Y_MAX;
+			var deltaX_magnitude = Math.sqrt(ballSpeedSqrd - deltaY * deltaY);
+			// reverse direction on X axis
+			deltaX = (deltaX > 0) ? -deltaX_magnitude : deltaX_magnitude;
+		}
+	}
+}
+
+function isColliding(x1, y1, w1, h1, x2, y2, w2, h2) {
+	var RIGHT_1 = x1 + (w1 / 2);
+	var LEFT_1 = x1 - (w1 / 2);
+	var TOP_1 = y1 - (h1 / 2);
+	var BOTTOM_1 = y1 + (h1 / 2);
+
+	var RIGHT_2 = x2 + (w2 / 2);
+	var LEFT_2 = x2 - (w2 / 2);
+	var TOP_2 = y2 - (h2 / 2);
+	var BOTTOM_2 = y2 + (h2 / 2);
+
+	return !(RIGHT_1 <= LEFT_2 ||
+			LEFT_1 >= RIGHT_2 ||
+			TOP_1 >= BOTTOM_2 ||
+			BOTTOM_1 <= TOP_2);
+}
+
+
+
+function restartGame() {
+	winner = null;
+	resetBall();
+	leftPaddleY = HEIGHT / 2;
+	rightPaddleY = HEIGHT / 2;
+	leftPlayerScore = 0;
+	rightPlayerScore = 0;
+}
+
+
+function draw() {
+	context.fillStyle = 'black';
+	context.fillRect(0, 0, WIDTH, HEIGHT);
+
+	if (winner) {
+		context.fillStyle = 'white';
+		context.textBaseline = 'middle';
+		context.textAlign = 'center';
+		context.fillText('Player ' + winner + ' wins. Press "R" to restart.', WIDTH / 2, HEIGHT / 2);
+	} else {
+		context.beginPath();
+		context.arc(ballX, ballY, BALL_RADIUS, 0, 2 * Math.PI);
+		context.fillStyle = 'white';
+		context.fill();
+
+		// draw paddles
+		context.fillStyle = 'white';
+		context.fillRect(LEFT_PADDLE_X - (PADDLE_WIDTH / 2), leftPaddleY - (PADDLE_HEIGHT / 2), PADDLE_WIDTH, PADDLE_HEIGHT);
+		context.fillRect(RIGHT_PADDLE_X - (PADDLE_WIDTH / 2), rightPaddleY - (PADDLE_HEIGHT / 2), PADDLE_WIDTH, PADDLE_HEIGHT);
+
+		// draw scores
+		context.font = "48px Arial";
+		context.textBaseline = 'top';
+
+		context.textAlign = 'left';
+		context.fillText(leftPlayerScore, WIDTH / 4, SCORE_MARGIN);
+
+		context.textAlign = 'right';
+		context.fillText(rightPlayerScore, 3 * WIDTH / 4, SCORE_MARGIN);
+	}
+}
+
+window.addEventListener('keydown', function (evt) {
+	if (evt.keyCode === 87) {
+		keyWPressed = true;
+		keySPressed = false;  // last keypress takes precedence
+	} else if (evt.keyCode === 83) {
+		keySPressed = true;
+		keyWPressed = false;   // last keypress takes precedence
+	} else if (evt.keyCode === 38) { // up arrow
+		keyArrowUpPressed = true;
+		keyArrowDownPressed = false;  // last keypress takes precedence
+	} else if (evt.keyCode === 40) {  // down arrow
+		keyArrowDownPressed = true;
+		keyArrowUpPressed = false;  // last keypress takes precedence
+	} else if (evt.keyCode === 82) {  // 'r'
+		if (winner) {
+			restartGame();
+		}
+	}
+});
+
+window.addEventListener('keyup', function (evt) {
+	if (evt.keyCode === 87) {   // 'w'
+		keyWPressed = false;
+	} else if (evt.keyCode === 83) { // 's'
+		keySPressed = false;
+	} else if (evt.keyCode === 38) {  // up arrow
+		keyArrowUpPressed = false;
+	} else if (evt.keyCode === 40) { // down arrow
+		keyArrowDownPressed = false;
+	}
+});
+
+function gameloop() {
+	update();
+	draw();
+	window.requestAnimationFrame(gameloop);
+}
+gameloop();
+
+
+</script>
+</html>

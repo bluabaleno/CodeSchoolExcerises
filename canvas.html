@@ -124,12 +124,14 @@ function update(){
 	}
 	if (ballCenterX - ballRadius < 0 ){
 		rightPlayerScore = rightPlayerScore + 1;
+		ballCenterX = ballRadius;
 		//reset game after player score.
 		if (rightPlayerScore >= 5){
 			winner = true;
 		}
 		dX = -dX;
 	} else if (ballCenterX + ballRadius > 1000){
+		ballCenterX = 1000 - ballRadius;
 		leftPlayerScore = leftPlayerScore + 1;
 		if (leftPlayerScore >= 5){
 			winner = true;
@@ -174,8 +176,8 @@ window.addEventListener('keyup', gameloop());
 
 function isColliding(x1,y1,radius,radius,x2,y2,width2,height2){
 	if ((x1 - radius <= x2 + width2 && x2 <= x1 + radius) && (y1 - radius <= y2 + height2 && y2 <= y1 + radius)){
-		dY = -dY;
-		dX = -dX;
+		dY = 2 + dY;
+		dX = 2 + dX;
 	}
 }
 
