@@ -1,0 +1,85 @@
+Q: What is the value in register 3 after running this code?
+
+	li $3, 0x000000FF
+	li $4, 0x00000001
+	add $3, $3, $4
+
+A: 
+0x000000ff to binary 0000 0000 0000 0000 0000 0000 1111 1111
+0x00000001 to binary 0000 0000 0000 0000 0000 0000 0000 0001
+doing the and oper 	 0000 0000 0000 0000 0000 0001 0000 0000
+
+converting to hex    0x00000100
+=============
+
+Q: What is the value in register 3 after running this code?
+
+	li $3, 0x000000FF
+	li $4, 0x00000001
+	sub $3, $3, $4
+
+A:  0000 0000 0000 0000 0000 0000 1111 1110
+
+or in hex 0x000000fe
+
+=============
+
+Q: What will happen when this add instruction runs? How can we fix the problem?
+
+	li $3, 0x7FFFFFFF
+	li $4, 0x00000001
+	add $3, $3, $4
+
+A: 0x7fffffff to binary 0111 1111 1111 1111 1111 1111 1111 1111
+   0x00000001 to binary 0000 0000 0000 0000 0000 0000 0000 0001
+
+   this will cause an overflow since we're using two's complement
+
+   we'll use addu insteand of add
+
+=============
+
+Q: What is the value in register 3 after running this code?
+
+	li $3, 0xFFFFFFFF
+	li $4, 0xFFFFFFFF
+	addu $3, $3, $4
+
+A: 0xfffffffe
+
+=============
+
+Q: What is the value in register 3 after running this code?
+
+	addiu $3, $0, 0xF032
+
+A: 0x0000f032
+
+how do we determine whether to add leading 0s or Fs?
+
+=============
+
+Q: Write code that multiplies the values 7 and -5, storing the result in register 9.
+
+(Remember immediate values can be expressed in decimal, not just hex, and you can use - to indicate a negative number.)
+
+A: 
+
+li $3, 7
+li $4, -5
+mult $3, $4
+mfhi $9
+mflo $9
+
+=============
+
+Q: Write code that divides 3 billion by 23, storing the remainder in register 13.
+
+(Remember that 3 billion exceeds the signed range, so we need an unsigned division.)
+
+A:
+
+li $3, 0xB2D05E00
+li $2, 23
+divu $3, $2
+mfhi $13 
