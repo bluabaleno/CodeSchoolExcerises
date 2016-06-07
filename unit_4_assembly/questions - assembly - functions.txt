@@ -2,6 +2,12 @@ Q: Declare an ascii string "Harry" with the label 'name'. The string should be t
 
 A:
 
+.data
+
+name: .asciiz "Harry"
+
+
+
 ===========
 
 Q: Write a function 'sum4' that takes four operands and returns their sum. Use the alternate register names.
@@ -9,6 +15,27 @@ Assume the result will fit in a single register, and don't worry about overflow.
 (You will not need the stack or temporary or stored registers.)
 
 A:
+
+# doesn't work yet, still need to figure out how to call functions
+
+# argument $4 = address of the first operand
+# argument $5 = address of the second operand
+# argument $6 = address of the third operand
+# argument $7 = address of the fourth operand
+# the result sum will be stored in register 4, $4
+
+sum4:	
+	addu $4, $4, $5
+	addu $4, $4, $6
+	addu $4, $4, $7
+	jr $31
+	
+li $4, 3
+li $5, 4
+li $6, 5
+li $7, 6
+jal sum4
+
 
 ===========
 

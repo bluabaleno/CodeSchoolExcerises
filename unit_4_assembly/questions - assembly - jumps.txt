@@ -24,10 +24,11 @@ li $3, 4
 li $4, 5
 li $5, 2
 bgtz $6, foo
-sub $3, $4, $5
+j bar
 foo: add $3, $4, $5
-add $4, $4, $6
-
+j baz
+bar: sub $3, $4, $5
+baz: add $4, $4, $5
 
 =============
 
@@ -42,8 +43,13 @@ li $7, 1
 li $2, 0x70000000
 li $3, 0x7600FFFC
 blez $7, foo
-jr $2
-foo: jr $3
+jr $3
+foo: jr $2
+
+
+The problem I have is that when the statement tests true, I can make it jump to the last label, which then will end the program. However, if the statement tests false, I let the program move to the next instruction and jump to the other address, but because I place the label at the end, it'll still jump to that address at the very end.
+
+is there a way to prevent from reaching the label? is there anyway to prevent program from executing the label at all unless specified, meaning it is only triggered when it is brached to, and not ran because its next in order.
 
 
 =============

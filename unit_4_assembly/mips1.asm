@@ -1,10 +1,13 @@
-li $3, 55 # this is variable x
-li $4, 0  # this is variable y
-li $5, 29
-li $6, -2
-sub $7, $3, $5 # this result will be used to compare to zero
-bltz $7, foo
-li $3, 35
-foo: mult $3, $6
-mfhi $4
-mflo $4
+li $4, 3
+li $5, 4
+li $6, 5
+li $7, 6
+
+sum4:	
+	addu $4, $4, $5
+	addu $4, $4, $6
+	addu $4, $4, $7
+	jr $31
+	
+jal sum4
+	
