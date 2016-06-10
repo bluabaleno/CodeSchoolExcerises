@@ -41,7 +41,30 @@ jal sum4
 
 Q: Write a function 'strLength' that returns the number of characters in an ASCII string. Assume the string is terminated by a null byte; the null byte does not count as part of the length. The address of the first byte of the string is passed as argument $a0. Return the result in $v0.
 
+in other words, you're given a string of data type .asciiz, where the string ends with a null byte and you have to find the length of this string minus the null byte. The address of the first byte of the string is passed as argument $a0, aka register 4, $4, and you need to return the result in $v0, aka register 2, $2
+
+I'll need to check for the null byte, with bgtz or bltz it should be a loop that adds 1 to a counter until it encounters a null byte, at which it returns the counter to $2
+
 A:
+
+.data 
+
+name: .asciiz "Harry"
+
+strLength:
+	#load address of name data on the argument $a0, or $4
+	la $4, name
+
+strLength_Loop:
+	lb, $5, ($4)
+	blez, $5, foo
+	addu $2, $2, 1
+	addu $4, $4, 1
+	j strLength_Loop
+
+
+foo: jr $31
+
 
 ===========
 
@@ -50,3 +73,7 @@ Q: Write a function 'foo' that returns the product of argument $a0 and the retur
 (Because we call another function, you need to store the return address of 'foo' on the stack and properly manage the stack. Remember that, by convention, a function does not guarantee preserving the values of the argument regisers.)
 
 A:
+
+we are writing one function that depends on the return value of another function, meaning we'll have to invoke a function within another one.
+
+because we are invoking one function within another, we have to keep track of the stack and manage it properly.

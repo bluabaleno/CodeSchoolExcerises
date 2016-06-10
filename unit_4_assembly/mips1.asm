@@ -1,13 +1,13 @@
-li $4, 3
-li $5, 4
-li $6, 5
-li $7, 6
+li $2, 100
+li $3, 300
+li $4, 4000
 
-sum4:	
-	addu $4, $4, $5
-	addu $4, $4, $6
-	addu $4, $4, $7
-	jr $31
-	
-jal sum4
-	
+foo: 
+	sub $5, $4, $2
+	add $2, $2, $3
+	blez $5, hop
+
+j foo
+
+hop: 
+	nop
