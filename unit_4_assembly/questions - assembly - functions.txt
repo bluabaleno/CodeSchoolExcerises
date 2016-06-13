@@ -77,3 +77,90 @@ A:
 we are writing one function that depends on the return value of another function, meaning we'll have to invoke a function within another one.
 
 because we are invoking one function within another, we have to keep track of the stack and manage it properly.
+
+remember that for the duration of the subroutine (aka the sub-function called by the main function), the frame pointer stays at the same place. Where as the stack pointer will move up and down as more memory address spaces are added and removed.
+
+
+foo:
+	
+	# FUNCTION START:
+
+	# store the frame pointer on the stack
+	sw $30, -4($29)
+
+	# store the return address on the stack
+	sw $31, -8($29)
+
+	# copy stack pointer to frame pointer
+	addu $30, $29, 0
+
+
+
+	# FUNCTION BODY:
+	
+	jal bar
+	mult $a0, $v0
+	mflo $v1
+	mfhi $v0
+
+	# FUNCTION CLEAN-UP AND RETURN
+
+	# restore return address from stack
+	lw $31, -8($30)
+
+	# restore stack pointer from the frame pointer
+	addu $29, $30, 0
+
+	# restore frame pointer from the stack
+	lw $30, -4($30)
+
+	# return 
+	jr $31
+
+
+here is Brian's answer, instead of using $29, $30 and $31, he used their special name, $sp (sp standing for stack pointer) and $fp (standing for frame pointer) and $ra (ra standing for return address)
+
+foo:
+  # FUNCTION START
+  # store the previous $fp on the stack
+  sw $fp, -4($sp)
+
+  # copy $sp to $fp
+  addu $fp, $sp, $zero
+
+  # store the return address on the stack (MIPS stack grows downwards)
+  sw $ra, -8($fp)
+
+  # store $s0 on stack so that we can modify it
+  sw $s0, -12($fp)
+
+  # adjust stack pointer to reflect that we added 12 bytes of data to the stack
+  addiu $sp, $sp, -12
+
+
+  # FUNCTION BODY
+  # save $a0 in $s0
+  addu $s0, $a0, $zero
+
+  jal bar
+  mult $s0, $v0
+  mfhi $v0
+  mflo $v1
+
+
+  # FUNCTION CLEAN-UP AND RETURN
+
+  # restore $s0
+  lw $s0, -12($fp)
+
+  # restore return address from stack  
+  lw $ra, -8($fp)
+
+  # restore stack pointer
+  addiu $sp, $fp, $zero  
+
+  # restore frame pointer
+  lw $fp, -4($fp)
+  
+  # return
+  jr $ra
