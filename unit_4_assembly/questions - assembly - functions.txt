@@ -53,13 +53,14 @@ name: .asciiz "Harry"
 
 strLength:
 	#load address of name data on the argument $a0, or $4
+	li $2, 0
 	la $4, name
 
 strLength_Loop:
 	lb, $5, ($4)
-	blez, $5, foo
-	addu $2, $2, 1
-	addu $4, $4, 1
+	beq, $5, foo
+	addiu $2, $2, 1
+	addiu $4, $4, 1
 	j strLength_Loop
 
 
@@ -92,9 +93,13 @@ foo:
 	sw $31, -8($29)
 
 	# copy stack pointer to frame pointer
-	addu $30, $29, 0
+	addiu $30, $29, 0
 
+  # store $s0 on stack so that we can modify it
+  sw $s0, -12($fp)
 
+  # adjust stack pointer to reflect that we added 12 bytes of data to the stack
+  addiu $sp, $sp, -12
 
 	# FUNCTION BODY:
 	
@@ -104,6 +109,9 @@ foo:
 	mfhi $v0
 
 	# FUNCTION CLEAN-UP AND RETURN
+
+	  # restore $s0
+  lw $s0, -12($fp)
 
 	# restore return address from stack
 	lw $31, -8($30)
@@ -117,6 +125,8 @@ foo:
 	# return 
 	jr $31
 
+
+#### need to store $s0 to $a0
 
 here is Brian's answer, instead of using $29, $30 and $31, he used their special name, $sp (sp standing for stack pointer) and $fp (standing for frame pointer) and $ra (ra standing for return address)
 
